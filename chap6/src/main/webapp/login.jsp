@@ -1,10 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
+<%!
+public String getCookie(Cookie[] cookies, String key){
+	if (cookies != null) {
+		for(Cookie c : cookies){
+			String cookieName = c.getName();
+			String cookieValue = c.getValue();
+			if(cookieName.equals(key)){
+				return cookieValue;
+			}
+		}
+	}
+	return null;
+}
+%>
+
+<%
+//String save_id_flag = getCookie(request.getCookies(), "save_id_flag"); 
+
+%>
+
 <%
 String user_id = (String)session.getAttribute("memberId");
-String save_user_id = "";
-String save_id_flag = "";
+String save_user_id = getCookie(request.getCookies(), "user_id");
+String save_id_flag = getCookie(request.getCookies(), "save_id_flag");
 %>
 
 <!DOCTYPE html>
@@ -20,7 +40,7 @@ String save_id_flag = "";
 <% if (user_id == null) { %>
 <form name="frmLogin" id="frmLogin" action="login_ok.jsp" method="post">
 	<label for="user_id">아이디</label> 
-	<input type="text" id="user_id" name="user_id" value="<%= save_user_id %>" maxlength="20" />
+	<input type="text" id="user_id" name="user_id" value="<%=(save_user_id != null) ? save_user_id : "" %>" maxlength="20" />
 	<input type="checkbox" id="save_id_flag" name="save_id_flag" value="Y" <%= (save_id_flag != null && save_id_flag.equals("Y")) ? "checked" : "" %> > 아이디 저장
 	<br><br>
 
