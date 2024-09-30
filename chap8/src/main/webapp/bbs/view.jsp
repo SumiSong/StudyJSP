@@ -53,7 +53,7 @@ if(info != null){
 			</tr>
 				<td colspan="6" class="align_center">
 				<input type="button" id="btnModifyOk" value="수정" />
-					<input type="submit" id="btnModifyOk" value="삭제" />
+					<input type="button" id="btnDelete" value="삭제" />
 					<input type="submit" id="btnToList" value="목록으로">
 				</td>
 			</tr>
@@ -68,5 +68,16 @@ const btnModifyOk = document.getElementById("btnModifyOk");
 btnModifyOk.addEventListener("click", function(){
 	location.href="modify.jsp?title=<%= info.getTitle() %>";
 })
+
+const btnDelete = document.getElementById("btnDelete");
+btnDelete.addEventListener("click", function(){
+	location.href="delete_ok.jsp?title=<%= info.getTitle() %>";
+})
+
+const btnToList = document.getElementById("btnToList");
+btnToList.addEventListener("click", function(){
+	location.href="list.jsp";
+})
+
 </script>
 </html>
